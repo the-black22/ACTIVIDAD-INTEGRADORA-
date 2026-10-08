@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EL ATP: La moneda energética de la vida</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#EAF3F8;--ink:#123A63;--sub:#4F6577;--panel:#ffffff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1A25;--ink:#D5E3EE;--sub:#9DB3C3;--panel:#16283A}}
+:root[data-theme="dark"]{--bg:#0E1A25;--ink:#D5E3EE;--sub:#9DB3C3;--panel:#16283A}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',Helvetica,Arial,sans-serif;display:flex;justify-content:center}
+main{width:100%;max-width:640px;padding:16px}
+header{background:#123A63;color:#fff;border-radius:22px 22px 0 0;padding:28px 18px 22px;text-align:center}
+h1{margin:0 0 10px;font-size:clamp(22px,6vw,32px);line-height:1.15}
+header p{margin:0;font-size:15px;color:#D5E3EE}
+.panel{background:var(--panel);border-radius:0 0 22px 22px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.hint{margin:0;text-align:center;font-size:15px;color:var(--sub)}
+.bar{height:8px;border-radius:4px;background:rgba(127,150,170,.25);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:#3AA655;transition:width .4s}
+.card{display:block;width:100%;border:0;border-radius:18px;color:#fff;text-align:left;font:inherit;padding:0;cursor:pointer}
+.card:focus-visible{outline:3px solid #123A63;outline-offset:3px}
+.row{display:flex;align-items:center;gap:14px;padding:14px 16px}
+.row svg.big{flex:0 0 auto;width:86px;height:86px}
+.t{font-size:19px;font-weight:700;line-height:1.2}
+.p{font-size:16px;line-height:1.3;margin-top:4px}
+.s{font-size:14px;margin-top:8px;opacity:.95}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s}
+.more>div{overflow:hidden}
+.more p{margin:0;padding:0 18px 16px;font-size:16px;line-height:1.45;border-top:1px solid rgba(255,255,255,.4);padding-top:12px}
+.card.open .more{grid-template-rows:1fr}
+.chev{margin-left:auto;font-size:22px;transition:transform .3s}
+.card.open .chev{transform:rotate(180deg)}
+.ic *{transform-box:view-box;transform-origin:32px 32px}
+.card.open .spin{animation:sp 3s linear infinite}
+.card.open .fall{animation:fl 1.2s ease-in-out infinite}
+.card.open .tick{animation:sp 6s linear infinite}
+.card.open .blink path.b{animation:bl 1.4s steps(1) infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@keyframes fl{50%{transform:translateY(6px)}}
+@keyframes bl{50%{opacity:.25}}
+.done{display:none;background:#123A63;color:#fff;border-radius:18px;padding:18px;text-align:center}
+.done.show{display:block}
+.done b{display:block;font-size:20px;margin-bottom:6px}
+.done span{font-size:22px;font-weight:700;color:#F2A33A}
+button.reset{margin-top:12px;border:2px solid #fff;background:none;color:#fff;border-radius:12px;padding:10px 18px;font:inherit;font-size:16px;cursor:pointer}
+footer{text-align:center;font-size:14px;color:var(--sub);padding:14px 0 6px}
+@media (prefers-reduced-motion:reduce){.card .spin,.card .fall,.card .tick,.card .blink path.b{animation:none!important}.more,.bar i{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<header><h1>EL ATP: LA MONEDA ENERGÉTICA DE LA VIDA</h1><p>Infografía interactiva | Las Huellas Moleculares de LUCA</p></header>
+<div class="panel">
+<p class="hint">Toca cada bloque para descubrir más. <b id="n">0</b> de 5 explorados</p>
+<div class="bar"><i id="bar"></i></div>
+<div id="cards" style="display:flex;flex-direction:column;gap:12px"></div>
+<div class="done" id="done"><b>¡Completaste la ruta del ATP!</b><span>ADP + Pi + energía de H⁺ → ATP</span><br><button class="reset" id="reset">Volver a empezar</button></div>
+</div>
+<footer>Carlos Adolfo Mármol Pérez · Instituto Nacional Cantón Lourdes</footer>
+</main>
+<script>
+var D=[
+{c:'#0F8F8B',t:'¿Qué es el ATP?',p:'La moneda energética de toda célula viva.',s:'Se descarga al soltar un fosfato y se recarga al volver a unirlo',m:'El ATP (adenosín trifosfato) almacena y transporta la energía química que la célula usa. Al romper un enlace fosfato libera energía; al volver a unirlo, se recarga: una batería recargable en ciclo continuo.',k:'blink',i:'<rect x="4" y="20" width="46" height="26" rx="4"/><path d="M50 28h6v10h-6"/><path class="b" d="M13 27v12M25 27v12M37 27v12"/>'},
+{c:'#F28C28',t:'Estructura de la ATP sintasa',p:'Una nanomáquina giratoria incrustada en la membrana.',s:'Rotor en la membrana + cabeza catalítica',m:'Es una proteína de varias subunidades (estructura cuaternaria): una porción incrustada en la membrana actúa como canal y rotor, y otra mira hacia el interior de la célula, donde ocurre la síntesis de ATP.',k:'spin',i:'<g class="spin"><circle cx="32" cy="32" r="8"/><circle cx="32" cy="32" r="20"/><path d="M32 5v9M32 50v9M5 32h9M50 32h9M13 13l6 6M45 45l6 6M51 13l-6 6M19 45l-6 6"/></g>'},
+{c:'#D94452',t:'El gradiente de H+',p:'La energía viene de una diferencia de concentración de protones.',s:'Más H+ de un lado de la membrana que del otro',m:'La respiración celular o la fotosíntesis acumulan protones (H⁺) a un lado de la membrana. Esa diferencia de concentración y de carga es el gradiente electroquímico: energía potencial almacenada.',k:'fall',i:'<g class="fall"><path d="M14 4v16M8 14l6 6 6-6M32 4v16M26 14l6 6 6-6M50 4v16M44 14l6 6 6-6"/></g><path d="M4 34h56M16 50h.5M32 50h.5M48 50h.5"/>'},
+{c:'#7B4BB5',t:'El giro que crea ATP',p:'El paso de protones hace girar la enzima y une ADP + Pi = ATP.',s:'Energía del gradiente = movimiento = enlace químico',m:'Los H⁺ solo pueden pasar por el canal de la ATP sintasa y hacen girar el rotor como una turbina. El giro llega a la cabeza catalítica y une ADP con Pi para formar ATP.',k:'spin',i:'<g class="spin"><path d="M52 32a20 20 0 1 1-8-16M46 6v12H34"/></g><circle cx="32" cy="32" r="3"/>'},
+{c:'#3AA655',t:'Conservada por 3,500 millones de años',p:'Casi sin cambios desde LUCA hasta hoy.',s:'Presente en bacterias, arqueas y eucariotas',m:'Con apenas tres grandes cambios estructurales, la ATP sintasa está en bacterias, arqueas y eucariotas. Lo más sencillo es que ya existía en LUCA y se heredó: evidencia directa de origen común.',k:'tick',i:'<circle cx="32" cy="32" r="24"/><path class="tick" d="M32 32V14M32 32l10 8"/>'}
+];
+var box=document.getElementById('cards'),seen={},cnt=0;
+D.forEach(function(d,x){
+var b=document.createElement('button');b.className='card';b.style.background=d.c;b.setAttribute('aria-expanded','false');
+b.innerHTML='<div class="row"><svg class="big" viewBox="0 0 104 104" aria-hidden="true"><circle cx="52" cy="54" r="46" fill="#fff"/><svg class="ic" x="22" y="24" width="60" height="60" viewBox="0 0 64 64" fill="none" stroke="'+d.c+'" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">'+d.i+'</svg><circle cx="16" cy="16" r="15" fill="#fff" stroke="'+d.c+'" stroke-width="3"/><text x="16" y="23" font-size="20" font-weight="700" text-anchor="middle" fill="'+d.c+'">'+(x+1)+'</text></svg><div><div class="t">'+d.t+'</div><div class="p">'+d.p+'</div><div class="s">'+d.s+'</div></div><span class="chev" aria-hidden="true">⌄</span></div><div class="more"><div><p>'+d.m+'</p></div></div>';
+b.onclick=function(){var o=b.classList.toggle('open');b.setAttribute('aria-expanded',o);if(o&&!seen[x]){seen[x]=1;cnt++;upd()}};
+box.appendChild(b)});
+function upd(){document.getElementById('n').textContent=cnt;document.getElementById('bar').style.width=cnt*20+'%';if(cnt===5){var e=document.getElementById('done');e.classList.add('show');e.scrollIntoView({behavior:'smooth',block:'nearest'})}}
+document.getElementById('reset').onclick=function(){seen={};cnt=0;document.querySelectorAll('.card').forEach(function(c){c.classList.remove('open');c.setAttribute('aria-expanded','false')});document.getElementById('done').classList.remove('show');upd();window.scrollTo({top:0,behavior:'smooth'})};
+</script>
+</body>
+</html>

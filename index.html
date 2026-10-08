@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Página educativa interactiva sobre cultivo de microorganismos bacterianos: medios de cultivo, condiciones de crecimiento, curva de crecimiento, técnicas de aislamiento y simuladores de laboratorio.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#10231d">
+<title>Cultivo de microorganismos bacterianos</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%2310231d' stroke='%233a9188' stroke-width='5'/><circle cx='40' cy='45' r='7' fill='%236fc2b6'/><circle cx='62' cy='56' r='5' fill='%23d89a3c'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>
+(function () {
+  var t; try { t = localStorage.getItem('theme'); } catch (e) {}
+  t = t || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo">Cultivo bacteriano</div>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#contenido">Contenido</a></li>
+    <li><a href="#esquemas">Esquemas</a></li>
+    <li><a href="#infografia">Infografía</a></li>
+    <li><a href="#laboratorio">Laboratorio</a></li>
+    <li><a href="#juego">Simulador</a></li>
+    <li><a href="#evaluacion">Evaluación</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Cambiar a tema oscuro">
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+    </button>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="petri-progress" aria-hidden="true">
+  <svg viewBox="0 0 100 100"><circle class="petri-track" cx="50" cy="50" r="44"/><circle class="petri-fill" id="petriFill" cx="50" cy="50" r="44"/></svg>
+  <span class="petri-colony c1"></span><span class="petri-colony c2"></span><span class="petri-colony c3"></span><span class="petri-colony c4"></span>
+</div>
+
+<section id="inicio" class="section hero">
+  <canvas id="colonyCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Biotecnología microbiana &middot; Segundo año de bachillerato</p>
+    <h1>Cultivo de microorganismos bacterianos</h1>
+    <p class="hero-lede">Una muestra, un medio de cultivo y las condiciones correctas: así se multiplica una bacteria hasta volverse visible. Esta página recorre los medios de cultivo, las condiciones de crecimiento, la curva poblacional y las técnicas para aislar una colonia pura.</p>
+    <div class="hero-buttons">
+      <a href="#contenido" class="btn btn-solid">Empezar a explorar</a>
+      <a href="#laboratorio" class="btn btn-outline">Ir al laboratorio</a>
+    </div>
+  </div>
+</section>
+
+<section id="objetivo" class="section objetivo">
+  <div class="objetivo-grid">
+    <h2 class="section-title">Qué vas a lograr</h2>
+    <ul class="objetivo-list">
+      <li>Comprender qué es un cultivo bacteriano y por qué requiere condiciones controladas.</li>
+      <li>Distinguir los tipos de medios de cultivo y para qué sirve cada uno.</li>
+      <li>Reconocer las condiciones fisicoquímicas que determinan el crecimiento bacteriano.</li>
+      <li>Interpretar las cuatro fases de la curva de crecimiento.</li>
+      <li>Aplicar los fundamentos de las técnicas de aislamiento de colonias.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contenido" class="section contenido">
+  <h2 class="section-title">Contenido científico</h2>
+  <div class="accordion">
+
+    <div class="accordion-item">
+      <button class="accordion-header"><span class="accordion-number">01</span><span>¿Qué es un cultivo bacteriano?</span><span class="accordion-icon">+</span></button>
+      <div class="accordion-body">
+        <p>Un cultivo bacteriano es el conjunto de técnicas y condiciones controladas mediante las cuales se hace crecer y multiplicar bacterias en un medio artificial que les proporciona los nutrientes necesarios para su desarrollo.</p>
+        <p>Se usa en diagnóstico clínico (identificar el agente infeccioso), investigación (estudio del metabolismo y la genética bacteriana), industria (producción de enzimas, antibióticos y alimentos fermentados) y control de calidad (verificar ausencia de contaminación en alimentos, agua o fármacos).</p>
+        <p><strong>La esterilidad y la asepsia</strong> son indispensables: garantizan que solo el microorganismo de interés se desarrolle en el medio, evitando contaminaciones que invaliden los resultados.</p>
+        <figure class="specimen-figure">
+          <!-- Para foto real: <div class="specimen-frame"><img src="img/aseptica.jpg" alt="Técnica aséptica" loading="lazy"></div> -->
+          <div class="specimen-frame"><img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=900&q=80" alt="Técnica aséptica en el laboratorio" loading="lazy"></div>
+          
+        </figure>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header"><span class="accordion-number">02</span><span>Tipos de medios de cultivo</span><span class="accordion-icon">+</span></button>
+      <div class="accordion-body">
+        <p><strong>Según estado físico:</strong> líquidos o caldos (sin agar), sólidos (con agar, permiten ver colonias individuales) y semisólidos (agar en baja concentración, para motilidad).</p>
+        <p><strong>Según composición:</strong> sintéticos o definidos (composición química exacta conocida) y complejos (con extractos naturales de composición no precisa).</p>
+        <p><strong>Según función:</strong> de enriquecimiento, selectivos, diferenciales, de transporte y de mantenimiento.</p>
+        <p><strong>Ejemplos:</strong> agar nutritivo (medio general), agar sangre (enriquecido y diferencial, observa hemólisis), agar MacConkey (selectivo y diferencial para gramnegativas) y caldo nutritivo (medio líquido básico).</p>
+        <figure class="specimen-figure">
+          <div class="specimen-frame"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaqiwcQUnPc-mdN9pFSbt5bzT12PiyW8rZTorSaLqjJQ&s" loading="lazy"></div>
+          
+        </figure>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header"><span class="accordion-number">03</span><span>Condiciones fisicoquímicas de crecimiento</span><span class="accordion-icon">+</span></button>
+      <div class="accordion-body">
+        <p>El crecimiento bacteriano depende de: temperatura (óptima 35-37&nbsp;°C para bacterias clínicas), pH (cercano a 6.5-7.5), oxígeno, humedad, presión osmótica, nutrientes y tiempo de incubación.</p>
+        <p><strong>Según requerimiento de oxígeno:</strong> aerobias (requieren oxígeno), anaerobias estrictas (no lo toleran), anaerobias facultativas (crecen con o sin oxígeno) y microaerófilas (requieren oxígeno en baja concentración).</p>
+        <div class="data-strip">
+          <div><span class="data-label">Temp.</span><span class="data-value">37&nbsp;°C</span></div>
+          <div><span class="data-label">pH</span><span class="data-value">7.0</span></div>
+          <div><span class="data-label">O₂</span><span class="data-value">variable</span></div>
+        </div>
+        <figure class="specimen-figure">
+          <div class="specimen-frame"><img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d" loading="lazy"></div>
+          
+        </figure>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header"><span class="accordion-number">04</span><span>Curva de crecimiento bacteriano</span><span class="accordion-icon">+</span></button>
+      <div class="accordion-body">
+        <p>Describe el comportamiento poblacional de una bacteria a lo largo del tiempo en un cultivo cerrado, en cuatro fases: latencia (lag), exponencial (log), estacionaria y de muerte.</p>
+        <p>Explora cada fase en el esquema interactivo más abajo.</p>
+        <figure class="specimen-figure">
+          <div class="specimen-frame"><img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=900&q=80" alt="Observación de cultivos al microscopio" loading="lazy"></div>
+          
+        </figure>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header"><span class="accordion-number">05</span><span>Técnicas de aislamiento</span><span class="accordion-icon">+</span></button>
+      <div class="accordion-body">
+        <p><strong>Estría por agotamiento:</strong> estrías sucesivas con el asa, diluyendo progresivamente la muestra hasta obtener colonias aisladas.</p>
+        <p><strong>Siembra por diseminación:</strong> se esparce la muestra líquida uniformemente sobre el agar.</p>
+        <p><strong>Siembra por vertido en placa:</strong> se mezcla la muestra con agar fundido antes de que solidifique.</p>
+        <p><strong>Diluciones seriadas:</strong> diluciones sucesivas para reducir la concentración bacteriana.</p>
+        <p>Obtener colonias aisladas es esencial para trabajar con una población pura. La <strong>unidad formadora de colonia (UFC)</strong> es la unidad de medida usada en el conteo bacteriano.</p>
+        <figure class="specimen-figure">
+          <div class="specimen-frame"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=900&q=80" alt="Siembra por estría sobre agar en placa de Petri" loading="lazy"></div>
+    
+        </figure>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="esquemas" class="section esquemas">
+  <h2 class="section-title">Esquemas interactivos</h2>
+  <div class="esquema-block">
+    <h3>Curva de crecimiento bacteriano</h3>
+    <p class="esquema-hint">Toca el gráfico o una etiqueta para ver qué ocurre en esa fase.</p>
+    <div class="chart-wrap"><canvas id="growthChart"></canvas></div>
+    <div class="fases-legend">
+      <button class="fase-btn" data-fase="lag" type="button"><span class="fase-dot dot-lag"></span>Lag</button>
+      <button class="fase-btn" data-fase="log" type="button"><span class="fase-dot dot-log"></span>Log</button>
+      <button class="fase-btn" data-fase="estacionaria" type="button"><span class="fase-dot dot-estacionaria"></span>Estacionaria</button>
+      <button class="fase-btn" data-fase="muerte" type="button"><span class="fase-dot dot-muerte"></span>Muerte</button>
+    </div>
+    <div class="fase-info" id="faseInfo" aria-live="polite"><p>Selecciona una fase para comenzar.</p></div>
+  </div>
+
+  <div class="esquema-block">
+    <h3>Tipos de medios de cultivo</h3>
+    <p class="esquema-hint">Toca cada placa para ver su ficha técnica.</p>
+    <div class="tarjetas-container">
+      <div class="tarjeta" tabindex="0" role="button" aria-pressed="false" aria-label="Agar nutritivo, toca para ver detalle"><div class="tarjeta-inner">
+        <div class="tarjeta-front"><span class="petri-dot"></span>Agar nutritivo</div>
+        <div class="tarjeta-back"><strong>Tipo</strong><span>General</span><strong>Función</strong><span>Crecimiento de amplia variedad de bacterias</span><strong>Uso</strong><span>Cultivo de rutina</span></div>
+      </div></div>
+      <div class="tarjeta" tabindex="0" role="button" aria-pressed="false" aria-label="Agar sangre, toca para ver detalle"><div class="tarjeta-inner">
+        <div class="tarjeta-front"><span class="petri-dot"></span>Agar sangre</div>
+        <div class="tarjeta-back"><strong>Tipo</strong><span>Enriquecido y diferencial</span><strong>Función</strong><span>Observar hemólisis</span><strong>Uso</strong><span>Identificación clínica</span></div>
+      </div></div>
+      <div class="tarjeta" tabindex="0" role="button" aria-pressed="false" aria-label="Agar MacConkey, toca para ver detalle"><div class="tarjeta-inner">
+        <div class="tarjeta-front"><span class="petri-dot"></span>Agar MacConkey</div>
+        <div class="tarjeta-back"><strong>Tipo</strong><span>Selectivo y diferencial</span><strong>Función</strong><span>Diferencia fermentadoras de lactosa</span><strong>Uso</strong><span>Detección de gramnegativas</span></div>
+      </div></div>
+      <div class="tarjeta" tabindex="0" role="button" aria-pressed="false" aria-label="Caldo nutritivo, toca para ver detalle"><div class="tarjeta-inner">
+        <div class="tarjeta-front"><span class="petri-dot"></span>Caldo nutritivo</div>
+        <div class="tarjeta-back"><strong>Tipo</strong><span>Líquido general</span><strong>Función</strong><span>Crecimiento masivo en suspensión</span><strong>Uso</strong><span>Preparación de inóculos</span></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section id="infografia" class="section infografia">
+  <h2 class="section-title">Infografía resumen</h2>
+  <div class="infografia-grid">
+    <div class="info-card"><span class="info-icon">◎</span><h4>¿Qué es un cultivo bacteriano?</h4><p>Multiplicar bacterias en condiciones controladas.</p></div>
+    <div class="info-card"><span class="info-icon">◫</span><h4>Tipos de medios</h4><p>Líquidos, sólidos, selectivos y diferenciales.</p></div>
+    <div class="info-card"><span class="info-icon">◐</span><h4>Condiciones de crecimiento</h4><p>Temperatura, pH, oxígeno y nutrientes.</p></div>
+    <div class="info-card"><span class="info-icon">∿</span><h4>Curva de crecimiento</h4><p>Lag, log, estacionaria, muerte.</p></div>
+    <div class="info-card"><span class="info-icon">⁘</span><h4>Técnicas de aislamiento</h4><p>De la muestra a la colonia pura.</p></div>
+    <div class="info-card"><span class="info-icon">※</span><h4>Importancia de la esterilidad</h4><p>Sin asepsia no hay resultados confiables.</p></div>
+  </div>
+</section>
+
+<section id="laboratorio" class="section laboratorio">
+  <h2 class="section-title">Laboratorio: ajusta las condiciones</h2>
+  <p class="juego-intro">Mueve los controles y mira cómo reacciona el cultivo.</p>
+  <div class="lab-panel lab-sim">
+    <canvas id="dishCanvas" width="320" height="320" aria-label="Placa de Petri simulada"></canvas>
+    <div class="lab-controls">
+      <label>Temperatura: <output id="tempOut">37</output> °C
+        <input type="range" id="tempRange" min="0" max="70" value="37"></label>
+      <label>pH: <output id="phOut">7.0</output>
+        <input type="range" id="phRange" min="2" max="12" step="0.1" value="7"></label>
+      <p class="data-label">Velocidad de crecimiento</p>
+      <div class="meter"><span id="meterFill"></span></div>
+      <p id="simMsg" class="mission-feedback" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section id="juego" class="section juego">
+  <h2 class="section-title">Simulador: panel de incubación</h2>
+  <p class="juego-intro">Eres el técnico de turno. Resuelve las 4 decisiones del cultivo y observa cómo crece tu colonia en el panel.</p>
+  <div class="lab-panel">
+    <div class="lab-readout">
+      <div><span class="data-label">UFC viables</span><span class="data-value" id="scoreValue">0</span></div>
+      <div><span class="data-label">Misión</span><span class="data-value" id="missionCount">0/4</span></div>
+      <div class="mini-petri" aria-hidden="true"><span class="mini-colony" id="col1"></span><span class="mini-colony" id="col2"></span><span class="mini-colony" id="col3"></span><span class="mini-colony" id="col4"></span></div>
+    </div>
+    <div class="lab-screen" id="labScreen" aria-live="polite"></div>
+    <button class="btn btn-outline" id="restartGame" type="button" hidden>Reiniciar simulación</button>
+  </div>
+</section>
+
+<section id="evaluacion" class="section evaluacion">
+  <h2 class="section-title">Evaluación digital</h2>
+  <p class="evaluacion-intro">Responde el cuestionario para comprobar lo que aprendiste.</p>
+  <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe1LS3RTEd3nYPgyxCYYDzvgOJeZifH-cM2vhkyO2aXaFUY4g/viewform?embedded=true" width="100%" height="700" class="form-embed" title="Evaluación digital" loading="lazy">Cargando formulario…</iframe>
+</section>
+
+<footer class="footer">
+  <div class="footer-col">
+    <h3>Roles del equipo</h3>
+    <ul>
+      <li>Coordinador / editor web: Cristopher Flores</li>
+      <li>Investigador de contenidos: Felix Preza</li>
+      <li>Creador del recurso interactivo: Cesar Franco</li>
+      
+    </ul>
+  </div>
+  <div class="footer-col">
+    <h3>Fuentes</h3>
+    <ul>
+      <li><a href="https://openstax.org/books/microbiology/pages/9-1-how-microbes-grow" target="_blank" rel="noopener">OpenStax Microbiology — 9.1 How Microbes Grow</a></li>
+      <li><a href="https://openstax.org/books/microbiology/pages/9-6-media-used-for-bacterial-growth" target="_blank" rel="noopener">OpenStax Microbiology — 9.6 Media Used for Bacterial Growth</a></li>
+      <li><a href="https://ocw.ehu.eus/file.php/48/Tema_4._calculo_de_los_parametros_que_definen_el_crecimiento_bacteriano.pdf" target="_blank" rel="noopener">OCW Universidad del País Vasco — Parámetros del crecimiento bacteriano</a></li>
+      <li><a href="https://www.fcn.unp.edu.ar/microgeneral/wp-content/uploads/2017/02/04-CULTIVO-DE-BACTERIAS.pdf" target="_blank" rel="noopener">Universidad Nacional de la Patagonia — Cultivo de bacterias</a></li>
+    </ul>
+  </div>
+  <p class="footer-copy">Actividad integradora — Biotecnología microbiana</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
